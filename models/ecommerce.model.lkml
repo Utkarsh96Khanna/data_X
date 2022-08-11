@@ -1190,4 +1190,4 @@ explore: inventory {
     description: "Counts by Condition Type"
     limit: 100
   }
-}
+  }
