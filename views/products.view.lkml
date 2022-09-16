@@ -5,6 +5,7 @@ view: products {
 
   dimension: id {
     primary_key: yes
+    hidden:  yes
     type: number
     sql: ${TABLE}.id ;;
   }
@@ -17,9 +18,11 @@ view: products {
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
+    drill_fields: [brand]
   }
 
   dimension: cost {
+    hidden:  yes
     type: number
     sql: ${TABLE}.cost ;;
   }
@@ -27,6 +30,7 @@ view: products {
   dimension: department {
     type: string
     sql: ${TABLE}.department ;;
+    drill_fields: [category]
   }
 
   dimension: distribution_center_id {
@@ -49,6 +53,27 @@ view: products {
     type: string
     sql: ${TABLE}.sku ;;
   }
+
+  measure: total_products {
+    label: "Total Products"
+    type: count_distinct
+    sql: ${id} ;;
+  }
+
+  measure: sum_retail_price{
+    label: "Sum of Retail Price"
+    type: sum
+    sql: ${retail_price} ;;
+    value_format_name: usd_0
+  }
+
+  measure: total_cost {
+    label: "Total Cost"
+    type: sum
+    sql: ${cost} ;;
+    value_format_name: usd_0
+  }
+
 
   measure: count {
     type: count

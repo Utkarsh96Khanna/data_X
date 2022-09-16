@@ -103,14 +103,20 @@ view: order_items {
   measure: count {
     type: count
     drill_fields: [detail*]
+    hidden: yes
+  }
+
+  measure: total_orders {
+    label: "Total Orders"
+    type: count_distinct
+    sql: ${order_id} ;;
   }
 
   measure: total_sale_price {
     label: "Total Sale Price"
     type: sum
-    value_format_name: usd
+    value_format_name: usd_0
     sql: ${sale_price} ;;
-    drill_fields: [detail*]
   }
 
   measure:  avg_spend_per_user {
