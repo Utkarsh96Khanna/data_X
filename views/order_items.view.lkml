@@ -100,6 +100,10 @@ view: order_items {
     sql: ${TABLE}.user_id ;;
   }
 
+  measure: timeframe {
+    sql: CONCAT(min(DATE(created_at))," To ", max(DATE(created_at)));;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
